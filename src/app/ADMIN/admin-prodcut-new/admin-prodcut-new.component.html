@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form #f='ngForm' (ngSubmit)="Save(f.value)">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" [(ngModel)]="prodcut.title" name='title' #title="ngModel" class='form-control' minlength="3" id='title' required placeholder="Prodcut Title">
+                    <div class="alert alert-danger" *ngIf='title.touched&&title.invalid'>
+                        <div *ngIf='title.errors.required'>Title Prodcut is Required</div>
+                        <div *ngIf='title.errors.minlength'>Min length of title is 3</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price">Prodcut Price</label>
+                    <div class="input-group mb-3 ">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="text " [(ngModel)]="prodcut.price" class='form-control' name='price' [min]="0" required #price="ngModel" id='price' placeholder="Prodcut Price" aria-label="Amount (to the nearest dollar)">
+                        <div class="input-group-append">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf='price.touched&&price.invalid'>
+                        <div *ngIf='price.errors.required'>price Prodcut is Required</div>
+                        <div *ngIf='price.errors.min'>Minimun Price of Prodcut is 0</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="PhotoUrl">PhotoUrl</label>
+                    <input type="text " [(ngModel)]="prodcut.PhotoUrl" name='PhotoUrl' url required #PhotoUrl="ngModel" class='form-control' id='PhotoUrl' placeholder="Prodcut Photo">
+
+                    <div class="alert alert-danger" *ngIf='PhotoUrl.touched&&PhotoUrl.invalid'>
+                        <div *ngIf='PhotoUrl.errors.required'>PhotoUrl Prodcut is Required</div>
+                        <div *ngIf='PhotoUrl.errors.url'>please Enter Valid URL</div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label for="Category">Category</label>
+                    <select class="form-control" [(ngModel)]="prodcut.Category" name='Category' required #Category="ngModel">
+            <option>Please Choose Category </option>
+            <option *ngFor='let category of lstCategories$ | async' value='{{category.Name}}'>{{category.Name}}</option>
+          </select>
+
+                    <div class="alert alert-danger" *ngIf='Category.touched&&Category.invalid'>
+                        <div *ngIf='Category.errors.required'>Category Prodcut is Required</div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="card" *ngIf="title.value||Category.value" style="width: 18rem;">
+                <img class="card-img-top img-responsive img img-thumbnail" [src]="PhotoUrl.value" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{title.value}}</h5>
+                    <p class="card-text">{{Category.value}}</p>
+                    <p class="card-text">{{price.value | currency:'USD':true}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

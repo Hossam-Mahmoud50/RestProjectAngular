@@ -1,0 +1,13 @@
+<div class="sticky-top">
+    <div class="list-group">
+        <div [class.active]="!category" routerLink="/prodcut" class="list-group-item list-group-item-action">
+            All Category
+        </div>
+        <ng-container *ngFor="let category of Categories">
+            <a [queryParams]="{category: category.Name}" [class.active]="category===category.Name" routerLink="/prodcut" class="list-group-item list-group-item-action">
+                    {{category.Name}}
+                </a>
+        </ng-container>
+    </div>
+
+</div>

@@ -1,0 +1,4 @@
+.list-group:hover {
+    cursor: pointer;
+    background-color: dimgrey;
+}

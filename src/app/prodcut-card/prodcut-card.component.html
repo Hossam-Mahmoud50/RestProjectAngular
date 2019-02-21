@@ -1,0 +1,22 @@
+<div class="card" *ngIf="prodcut.payload.val().title||prodcut.payload.val().Category" style="width: 18rem;">
+    <img class="card-img-top img-responsive img img-thumbnail" [src]="prodcut.payload.val().PhotoUrl" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{prodcut.payload.val().title}}</h5>
+        <p class="card-text">{{prodcut.payload.val().Category}}</p>
+        <p class="card-text">{{prodcut.payload.val().price | currency:'USD'}}</p>
+    </div>
+    <div class="card-footer">
+        <button *ngIf="getQuantity() === 0 ; else UpadteCart " (click)="addtoCart()" class="btn btn-primary btn-block">Add to Card</button>
+    </div>
+    <ng-template #UpadteCart>
+        <div class="row no-gutters">
+            <div class="col-2">
+                <button (click)="Removequnatity()" class="btn btn-primary btn-block">-</button>
+            </div>
+            <div class="col text-center">{{getQuantity()}} in cart</div>
+            <div class="col-2">
+                <button (click)="addtoCart()" class="btn btn-primary btn-block">+</button>
+            </div>
+        </div>
+    </ng-template>
+</div>

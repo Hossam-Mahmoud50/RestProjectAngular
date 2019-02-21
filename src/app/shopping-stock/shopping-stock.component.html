@@ -1,0 +1,23 @@
+<h1 class="animated fadeInDown"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Shopping Cart</h1>
+<ng-container *ngIf="cart$  |async as cart">
+    <h5 class="animated fadeInDown"> the Cart has {{cart.GetTotalItem}} items</h5>
+    <table class="table  table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prodcutid of cart.getPridIds">
+                <ng-container *ngIf="cart.items[prodcutid].quantity!=0">
+                    <td>{{cart.items[prodcutid].prodcut.title}}</td>
+                    <td>{{cart.items[prodcutid].prodcut.price}}</td>
+                    <td>{{cart.items[prodcutid].quantity}}</td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+    <h5 class="animated bounceInRight">Total Price is {{cart.GetTotalPrice}}</h5>
+</ng-container>

@@ -1,0 +1,24 @@
+<div class="form-group">
+    <a routerLink='/admin/prodcut/new' class="btn btn-primary">Create New Prodcut <i class="fa fa-angle-double-right"></i></a>
+</div>
+<p>
+    <input type="text" class="form-control" placeholder="Search....." #query (keyup)="Filter(query.value)"></p>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table row-border hover">
+    <thead class="thead-dark ">
+        <tr>
+            <th>Title <i class="fa fa-angle-double-up"></i></th>
+            <th>Price <i class="fa fa-angle-double-up"></i></th>
+            <th>Edit <i class="fa fa-angle-double-up"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of FilterProdcuts">
+            <td>{{item.payload.val().title}}</td>
+            <td>{{item.payload.val().price}}</td>
+            <td>
+                <button [routerLink]="['/admin/prodcut/',item.key]" class="btn btn-primary">Edit</button>
+                <span> <button class="btn btn-danger" (click)="Delete(item.key)">Delete</button></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
